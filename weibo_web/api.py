@@ -10,9 +10,19 @@ class Weibo:
         self.session = requests.session()
         self.uuid = 0
 
+    def _retry(func):
+        def wrapper(self, *args, **kwargs):
+            try:
+                return func(self, *args, **kwargs)
+            except:
+                self.login()
+                return func(self, *args, **kwargs)
+        return wrapper
+
     def login(self):
         self.uuid, self.session = login(self.username, self.password)
 
+    @_retry
     def get_username(self):
         return get_username(self.session, self.uuid)
 
@@ -27,3 +37,5 @@ class Weibo:
 
     def comment(self):
         pass
+
+
