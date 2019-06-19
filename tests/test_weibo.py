@@ -3,7 +3,6 @@ import tests
 from weibo_web import Weibo
 
 wb = Weibo(tests.username, tests.password)
-wb.login()
 
 
 def test_get_username():
