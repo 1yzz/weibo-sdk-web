@@ -36,10 +36,6 @@ try:
     session.get(index_url, headers=headers, timeout=2)
 except:
     session.get(index_url, headers=headers)
-try:
-    input = raw_input
-except:
-    pass
 
 
 def get_su(username):
@@ -130,10 +126,11 @@ def login(username, password):
     if showpin == 0:
         login_page = session.post(login_url, data=postdata, headers=headers)
     else:
-        pcid = sever_data["pcid"]
-        get_cha(pcid)
-        postdata['door'] = input(u"请输入验证码")
-        login_page = session.post(login_url, data=postdata, headers=headers)
+        raise Exception('需要验证码...')
+        # pcid = sever_data["pcid"]
+        # get_cha(pcid)
+        # postdata['door'] = input(u"请输入验证码")
+        # login_page = session.post(login_url, data=postdata, headers=headers)
 
     login_loop = login_page.text
 

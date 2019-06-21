@@ -1,7 +1,7 @@
 import requests
 from .login import login
 from .user import get_username
-from .post import post_text
+from .post import post_text, upload_pic
 
 
 def _retry(max_retry=100):
@@ -20,6 +20,9 @@ def _retry(max_retry=100):
 
 class Weibo:
     def __init__(self, username, password):
+        if not username or not password:
+            raise Exception('用户名密码不能为空')
+
         self.username = username
         self.password = password
         self.session = requests.session()
@@ -42,6 +45,9 @@ class Weibo:
 
     def post_with_img(self):
         pass
+
+    def upload_pic(self, b64):
+        return upload_pic(self.session, b64)
 
     def repost(self):
         pass
