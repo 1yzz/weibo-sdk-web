@@ -1,4 +1,8 @@
-.PHONY: test
+.PHONY: init
+init:
+	pip install pipenv --upgrade
+	pipenv install --dev
+
 test:
 	pytest
 
