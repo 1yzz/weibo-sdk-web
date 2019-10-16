@@ -55,8 +55,7 @@ class Weibo:
         else:
             return post_text(self.session, text)
 
-
-     @_retry()
+    @_retry()
     def post_text_with_b64img(self, text, imgs):
         if imgs is not None and len(imgs) > 0:
             pic_ids = []
