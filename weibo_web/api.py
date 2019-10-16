@@ -1,7 +1,8 @@
 import requests
+import base64
 from .login import login
 from .user import get_username
-from .post import post_text, upload_pic
+from .post import post_text, post_text_with_img, upload_pic
 
 
 def _retry(max_retry=100):
@@ -43,10 +44,19 @@ class Weibo:
     def post_text(self, text):
         return post_text(self.session, text)
 
-    def post_with_img(self):
-        pass
+    @_retry()
+    def post_text_with_img(self, text, imgs):
+        if imgs is not None and len(imgs) > 0:
+            pic_ids = []
+            for img in imgs:
+                pic_ids.append(self.upload_pic(img))
 
-    def upload_pic(self, b64):
+            return post_text_with_img(self.session, text, ','.join(pic_ids))
+        else:
+            return post_text(self.session, text)
+
+    def upload_pic(self, url):
+        b64 = base64.b64encode(requests.get(url).content)
         return upload_pic(self.session, b64)
 
     def repost(self):
