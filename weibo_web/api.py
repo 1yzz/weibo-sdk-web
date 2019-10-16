@@ -55,6 +55,18 @@ class Weibo:
         else:
             return post_text(self.session, text)
 
+
+     @_retry()
+    def post_text_with_b64img(self, text, imgs):
+        if imgs is not None and len(imgs) > 0:
+            pic_ids = []
+            for b64img in imgs:
+                pic_ids.append(upload_pic(self.session, b64img))
+
+            return post_text_with_img(self.session, text, '|'.join(pic_ids))
+        else:
+            return post_text(self.session, text)
+
     @_retry()
     def upload_pic(self, url):
         b64 = base64.b64encode(requests.get(url).content)
