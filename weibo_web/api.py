@@ -51,10 +51,11 @@ class Weibo:
             for img in imgs:
                 pic_ids.append(self.upload_pic(img))
 
-            return post_text_with_img(self.session, text, ','.join(pic_ids))
+            return post_text_with_img(self.session, text, '|'.join(pic_ids))
         else:
             return post_text(self.session, text)
 
+    @_retry()
     def upload_pic(self, url):
         b64 = base64.b64encode(requests.get(url).content)
         return upload_pic(self.session, b64)

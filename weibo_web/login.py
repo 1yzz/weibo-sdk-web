@@ -127,10 +127,10 @@ def login(username, password):
         login_page = session.post(login_url, data=postdata, headers=headers)
     else:
         raise Exception('需要验证码...')
-        # pcid = sever_data["pcid"]
-        # get_cha(pcid)
-        # postdata['door'] = input(u"请输入验证码")
-        # login_page = session.post(login_url, data=postdata, headers=headers)
+        pcid = sever_data["pcid"]
+        get_cha(pcid)
+        postdata['door'] = input(u"请输入验证码")
+        login_page = session.post(login_url, data=postdata, headers=headers)
 
     login_loop = login_page.text
 

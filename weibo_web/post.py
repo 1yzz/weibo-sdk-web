@@ -81,9 +81,7 @@ def upload_pic(session, base64_data):
     }
     r = session.post(url, params=params, data=payload, allow_redirects=False)
     # Location: https://weibo.com/aj/static/upimgback.html?_wv=5&callback=STK_ijax_156108350363335&ret=1&pid=804a43cegy1g48k8hemi7j20ig0ag0sv
-    print(r.headers.get('location'))
-    print(r.headers.get('server'))
-    print(r.headers)
-    print(r.status_code)
-    print(r.content)
+    location = r.headers.get('location')
+    if location is None:
+        raise Exception('无法获得pid')
     return re.findall(r'pid=(.*?)$', r.headers.get('location'))[0]
