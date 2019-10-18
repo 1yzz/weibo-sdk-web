@@ -1,8 +1,11 @@
 # weibo-sdk-web
 
 > 用户名+密码的方式，通过https://weibo.com调用API
-> call Weibo API using https://weibo.com via your username and password
 
+### Install
+```
+pip install weibo-sdk-web
+```
 
 ### 功能
 * 登陆
@@ -44,6 +47,8 @@ $ export WEIBO_USERNAME=你的用户名
 $ export WEIBO_PWD=你的密码
 ```
 
+### Pypi
+https://pypi.org/project/weibo-sdk-web/
 
 ### Thanks to
 * https://github.com/xchaoinfo/fuck-login
